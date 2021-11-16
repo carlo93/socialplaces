@@ -1,0 +1,41 @@
+<?php
+
+namespace App\Mail;
+
+use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Mail\Mailable;
+use Illuminate\Queue\SerializesModels;
+
+class ContactMail extends Mailable
+{
+    use Queueable, SerializesModels;
+
+    public $details;
+    /**
+     * Create a new message instance.
+     *
+     * @return void
+     */
+    public function __construct($details)
+    {
+        $this->details = $details;
+    }
+
+    /**
+     * Build the message.
+     *
+     * @return $this
+     */
+    public function build()
+    {
+        // Set Contact Name
+        $name = $this->details['name'];
+        // Set Contact Email
+        $email = $this->details['email'];
+        // Set Contact Subject
+        $subject = 'Social Places Contact Form Notification';
+
+        return $this->from($email, 'Mailtrap')->subject($subject)->view('emails.contact-mail', compact('name'));
+    }
+}
