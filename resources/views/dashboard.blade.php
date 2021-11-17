@@ -39,10 +39,8 @@
                                         {{ $contact->gender->name ?? '' }}
                                     </td>
                                     <td>
-                                        <a class="btn btn-xs btn-primary" href="{{ route('contact-view', encrypt($contact->id)) }}">
-                                            View
-                                        </a>
-                                        <form action="{{ route('contact-view', encrypt($contact->id)) }}" method="POST" onsubmit="return confirm('Confirm Deletion');" style="display: inline-block;">
+                                        <button class="btn btn-xs btn-primary ctinfo" data-id="{{ $contact->id }}">View</button>
+                                        <form action="{{ route('destroy', $contact->id) }}" method="POST" onsubmit="return confirm('Confirm Deletion');" style="display: inline-block;">
                                             <input type="hidden" name="_method" value="DELETE">
                                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                             <input type="submit" class="btn btn-xs btn-danger" value="Delete">

@@ -61,4 +61,23 @@ class ContactController extends Controller
         return response()->json(['success'=>'Successfully']);
 
     }
+
+    public function view(Request $request)
+    {
+        $id = ($request->id) ? $request->id : null;
+
+        $contact = Contact::find($id);
+        $response['title'] = $contact->name . ' - ' . $contact->email;
+        $response['body'] = $contact->content;
+
+        return $response;
+    }
+
+    public function destroy($id)
+    {
+        
+        Contact::find($id)->delete();
+
+        return back();
+    }
 }

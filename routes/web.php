@@ -16,6 +16,8 @@ use App\Http\Controllers\ContactController;
 
 Route::get('/', [ContactController::class, 'create'])->name('contact-view');
 Route::post('/store', [ContactController::class, 'store']);
+Route::get('/view', [ContactController::class, 'view']);
+Route::delete('/destroy/{id}', [ContactController::class, 'destroy'])->name('destroy');
 
 // Route::get('{any}', function () {
 //     return view('layouts.front');
